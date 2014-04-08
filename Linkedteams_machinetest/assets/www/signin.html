@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <script type="text/javascript" charset="utf-8" src="cordova-2.5.0.js"></script>
+		<title>Sign in</title>
+		<!--
+		<link href="jqueryui/css/ui-lightness/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+		<script src="jqueryui/js/jquery-1.10.2.js"></script>
+		<script src="jqueryui/js/jquery-ui-1.10.4.custom.js"></script>
+		<script type="text/javascript" src="js/signInWebservice.js"></script>
+        <script type="text/javascript" src="js/signInWebserviceCalling.js"></script>-->
+		
+		<link href="stylesheet/signin.css" rel="stylesheet" />
+		<link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.1.0.min.css" />  
+        <script type="text/javascript" src="jquery.mobile/jquery.mobile-1.6.4.min.js"></script>
+        <script type="text/javascript" src="jquery.mobile/jquery.mobile-1.0.min.js"></script>
+        <script type="text/javascript" src="js/signin.js"></script>
+        
+        <script type="text/javascript" charset="utf-8" >
+          // $(document).bind("mobileinit", function(){$.mobile.defaultPageaTransition = "none";});
+          document.addEventListener("deviceready", onDeviceReady, false);
+          
+          function onDeviceReady() {
+          		document.addEventListener("backbutton", onBackKeyDown, false);
+          		checkConnection();
+          }
+          
+          function onBackKeyDown() {
+    			console.log("Back button pressed");
+    			navigator.app.exitApp();
+    	  }
+          
+          function checkConnection() {
+          		var networkState = navigator.network.connection.type;
+                var states = {};
+                states[Connection.UNKNOWN]  = 'Unknown connection';
+                states[Connection.ETHERNET] = 'Ethernet connection';
+                states[Connection.WIFI]     = 'WiFi connection';
+                states[Connection.CELL_2G]  = 'Cell 2G connection';
+                states[Connection.CELL_3G]  = 'Cell 3G connection';
+                states[Connection.CELL_4G]  = 'Cell 4G connection';
+                states[Connection.CELL]     = 'Cell generic connection';
+                states[Connection.NONE]     = 'No network connection';
+                window.localStorage.setItem("networkstate", states[networkState]);
+                  
+                var state = window.localStorage.getItem("networkstate");
+                    if(state == "No network connection"){
+                        console.log("No network connection");
+                        var message = "Internet connection required";
+                        showAlert(message);
+                      }
+              }
+              
+          function alertDismissed() {
+			    //navigator.app.exitApp();
+			}
+			
+			// Show a custom alert
+			function showAlert(message) {
+			    navigator.notification.alert(
+			         message,                // message
+			         alertDismissed,         // callback
+			         'Alert',                // title
+			         'Done'                  // buttonName
+			    );
+			}
+			
+			        
+		</script>
+			
+	</head>
+
+	<body id="body" onLoad="" >
+		
+		<div align="center" style="padding:10px;" >Username <input id="username_input" class="form-control" type="email" value="" placeholder=" username" ></div>
+		<div align="center" style="padding:10px;" >Password <input id="password_input" class="form-control" type="password" value="" placeholder=" password" ></div>
+		
+		<div align="center" onClick="sign_in()" >
+			<img align="centre" style="width:75px; height:40px;" src="images/signin.png" />
+		</div>      
+       
+    </div>
+	</body>
+</html>

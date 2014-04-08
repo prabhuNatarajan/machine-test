@@ -1,0 +1,15 @@
+/* CSS Document */
+
+#body { overflow-x:hidden; background-image:url("../images/fmcg_background_template.jpg"); background-repeat:repeat-x; background-size:100%; weight:100%; }
+
+#image { padding:20px 0 20px 0;}
+
+#jquery-loader.blue-with-image-2{
+		    border:none;
+		    padding-top:35px;
+		    background-color: transparent;
+		    text-align: center;
+		    background-image: url(images/ajax-loader.gif);
+		    background-position: center center;
+		    background-repeat: no-repeat;
+		}
